@@ -16,8 +16,8 @@
             flex-direction: column;
         }
 
-                /* Top Bar Styling */
-                .top-bar {
+        /* Top Bar Styling */
+        .top-bar {
             background-color: #007bff;
             color: white;
             padding: 15px;
@@ -54,6 +54,14 @@
             color: #555;
         }
 
+        /* Logo Styling */
+        .card-logo {
+            width: 100px; /* Set the width to make the logo smaller */
+            height: auto; /* Keep the aspect ratio intact */
+            margin-left: 20px; /* Add margin to the left */
+            margin-top: 10px; /* Optional: Add space at the top */
+        }
+
         .back-link {
             display: block;
             text-align: center;
@@ -74,6 +82,7 @@
             <h2>Item Details</h2>
         </div>
         <div class="item-detail">
+            <img src="{{ item.logo.url }}" alt="Logo" class="card-logo">
             <p><strong>App Name:</strong> {{ item.appname }}</p>
             <p><strong>App Link:</strong> <a href="{{ item.applink }}" target="_blank">{{ item.applink }}</a></p>
             <p><strong>Category:</strong> {{ item.category1 }}</p>

@@ -2,9 +2,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
-from .forms import SignUpForm
+from accounts.forms import SignUpForm
 from django.contrib.auth.decorators import login_required
-from items.models import Item
+from accounts.models import Item
 
 # Signup view
 def signup(request):

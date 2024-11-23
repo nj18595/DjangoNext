@@ -1,14 +1,15 @@
 from django.shortcuts import render, redirect
 from items.models import Item
 from items.forms import ItemForm
+from django.contrib.auth import login, authenticate
 from items.forms import SignUpFormAdmin, LoginFormAdmin
 from django.contrib.auth.decorators import login_required
 from items.models import Item
 
-@login_required
+@login_required(login_url="admin_login")
 def add_item(request):
     if request.method == 'POST':
-        form = ItemForm(request.POST)
+        form = ItemForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
             return redirect('home')
@@ -16,7 +17,7 @@ def add_item(request):
         form = ItemForm()
     return render(request, 'add_item.html', {'form': form})
 
-@login_required
+@login_required(login_url="admin_login")
 def home(request):
     items = Item.objects.all()
     return render(request, 'list_items.html', {'items': items})

@@ -53,7 +53,7 @@
         /* Card grid styles */
         .card-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));  /* Doubled card width (500px minimum) */
             gap: 20px;
             margin-top: 30px;
         }
@@ -66,6 +66,9 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             padding: 20px;
+            display: flex;
+            align-items: center; /* Vertically center the logo and text */
+            justify-content: space-between; /* Space out the logo and text */
         }
 
         .card:hover {
@@ -95,6 +98,14 @@
 
         .card a:hover {
             color: #0056b3;
+        }
+
+        /* Styling for logo inside card */
+        .card-logo {
+            width: 100px;  /* Adjust logo size */
+            height: auto;
+            object-fit: contain;
+            margin-right: 0px; /* Space between logo and text */
         }
 
         /* Beautiful button styles for Add New Item */
@@ -143,11 +154,15 @@
         <div class="card-container">
             {% for item in items %}
             <div class="card">
-                <h3>{{ item.appname }}</h3>
-                <p><strong>Category:</strong> {{ item.category1 }}</p>
-                <p><strong>SubCategory:</strong> {{ item.category2 }}</p>
-                <p><strong>Points:</strong> {{ item.add_points }}</p>
-                <p><strong>Link:</strong> <a href="{{ item.applink }}" target="_blank">{{ item.applink }}</a></p>
+                <!-- Logo on the left, vertically centered -->
+                <img src="{{ item.logo.url }}" alt="Logo" class="card-logo">
+                <div>
+                    <h3>{{ item.appname }}</h3>
+                    <p><strong>Category:</strong> {{ item.category1 }}</p>
+                    <p><strong>SubCategory:</strong> {{ item.category2 }}</p>
+                    <p><strong>Points:</strong> {{ item.add_points }}</p>
+                    <p><strong>Link:</strong> <a href="{{ item.applink }}" target="_blank">{{ item.applink }}</a></p>
+                </div>
             </div>
             {% empty %}
             <div class="no-items">No items added yet.</div>

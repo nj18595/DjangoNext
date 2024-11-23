@@ -19,6 +19,8 @@ class Item(models.Model):
     category1 = models.CharField(max_length=50, choices=CATEGORY_CHOICES_1)
     category2 = models.CharField(max_length=50, choices=CATEGORY_CHOICES_2)
     add_points = models.IntegerField()
+    logo = models.ImageField(upload_to='images/')  # Store logo image
+
 
     def __str__(self):
         return self.appname
