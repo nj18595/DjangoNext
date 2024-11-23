@@ -5,6 +5,13 @@ from django.contrib.auth.forms import AuthenticationForm
 from .forms import SignUpForm
 from django.contrib.auth.decorators import login_required
 from items.models import Item
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework import status
+from .models import UploadedImage
+from .serializers import UploadedImageSerializer
+from django.shortcuts import render
 
 # Signup view
 def signup(request):
@@ -41,3 +48,14 @@ def list_items(request):
 def item_detail(request, item_id):
     item = get_object_or_404(Item, id=item_id)  # Get the item or 404 if not found
     return render(request, 'item_detail.html', {'item': item})
+
+class ImageUploadView(APIView):
+    parser_classes = (MultiPartParser, FormParser)
+
+    def post(self, request, *args, **kwargs):
+        serializer = UploadedImageSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
