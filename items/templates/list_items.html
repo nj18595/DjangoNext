@@ -5,121 +5,155 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
     <style>
+        /* General body styles */
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #f4f7fb;
+            background-color: #f1f6f9;
             margin: 0;
             padding: 0;
             display: flex;
-            justify-content: center;
             align-items: flex-start;
             min-height: 100vh;
             flex-direction: column;
-        }
-
-        .container {
-            background-color: #ffffff;
-            padding: 30px;
-            margin-top: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            width: 80%;
-            max-width: 1000px;
-            overflow-x: auto;
-        }
-
-        h1 {
-            text-align: center;
             color: #333;
-            margin-bottom: 20px;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-        }
-
-        table, th, td {
-            border: 1px solid #ddd;
-        }
-
-        th, td {
-            padding: 12px;
-            text-align: left;
-        }
-
-        th {
+        /* Top bar styles */
+        .top-bar {
             background-color: #007bff;
             color: white;
-            font-weight: bold;
+            text-align: center;
+            padding: 20px 0;
+            width: 100%;
+            margin-top: 20px;
         }
 
-        td a {
+        .top-bar h1 {
+            font-size: 2.5rem;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        /* Container styles */
+        .container {
+            background-color: #fff;
+            padding: 40px;
+            margin-top: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            overflow-x: auto;
+            transition: all 0.3s ease;
+        }
+
+        .container:hover {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Card grid styles */
+        .card-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        /* Card styles */
+        .card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding: 20px;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .card h3 {
+            font-size: 1.6rem;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 14px;
+            color: #555;
+            margin: 8px 0;
+        }
+
+        .card a {
             color: #007bff;
             text-decoration: none;
-            word-wrap: break-word;
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
         }
 
-        td a:hover {
+        .card a:hover {
             color: #0056b3;
         }
 
-        td {
-            font-size: 14px;
-            color: #555;
+        /* Beautiful button styles for Add New Item */
+        .add-button {
+            display: inline-block;
+            padding: 15px 35px;
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 50px;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-top: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .add-button:hover {
+            background: linear-gradient(135deg, #0056b3, #007bff);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .add-button:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         .no-items {
             text-align: center;
             color: #777;
             font-size: 16px;
-            font-weight: bold;
-        }
-
-        a {
-            margin-top: 20px;
-            text-decoration: none;
-            color: #007bff;
-            font-size: 16px;
-            font-weight: bold;
-        }
-
-        a:hover {
-            color: #0056b3;
+            font-weight: 600;
+            padding: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <!-- Top bar with blue background and h1 -->
+    <div class="top-bar">
         <h1>All Added Items</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>App Name</th>
-                    <th>App Link</th>
-                    <th>Category 1</th>
-                    <th>Category 2</th>
-                    <th>Points</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in items %}
-                <tr>
-                    <td>{{ item.appname }}</td>
-                    <td><a href="{{ item.applink }}" target="_blank">{{ item.applink }}</a></td>
-                    <td>{{ item.category1 }}</td>
-                    <td>{{ item.category2 }}</td>
-                    <td>{{ item.add_points }}</td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="5" class="no-items">No items added yet.</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        <a href="{% url 'add_item' %}">Add New Item</a>
+    </div>
+
+    <div class="container">
+        <div class="card-container">
+            {% for item in items %}
+            <div class="card">
+                <h3>{{ item.appname }}</h3>
+                <p><strong>Category:</strong> {{ item.category1 }}</p>
+                <p><strong>SubCategory:</strong> {{ item.category2 }}</p>
+                <p><strong>Points:</strong> {{ item.add_points }}</p>
+                <p><strong>Link:</strong> <a href="{{ item.applink }}" target="_blank">{{ item.applink }}</a></p>
+            </div>
+            {% empty %}
+            <div class="no-items">No items added yet.</div>
+            {% endfor %}
+        </div>
+        <a href="{% url 'add_item' %}" class="add-button">Add New Item</a>
     </div>
 </body>
 </html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Detail</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fb;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: flex-start;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+                /* Top Bar Styling */
+                .top-bar {
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .top-bar h2 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            margin-top: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .item-detail {
+            margin-bottom: 20px;
+        }
+
+        .item-detail p {
+            font-size: 18px;
+            color: #555;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 16px;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="top-bar">
+            <h2>Item Details</h2>
+        </div>
+        <div class="item-detail">
+            <p><strong>App Name:</strong> {{ item.appname }}</p>
+            <p><strong>App Link:</strong> <a href="{{ item.applink }}" target="_blank">{{ item.applink }}</a></p>
+            <p><strong>Category:</strong> {{ item.category1 }}</p>
+            <p><strong>SubCategory:</strong> {{ item.category2 }}</p>
+            <p><strong>Points:</strong> {{ item.add_points }}</p>
+        </div>
+        <a href="{% url 'user_home' %}" class="back-link">Back to List</a>
+    </div>
+</body>
+</html>

@@ -1,11 +1,153 @@
-<!-- accounts/templates/accounts/home.html -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Home</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>List of Items</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fb;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: flex-start;
+            min-height: 100vh;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        /* Top Bar Styling */
+        .top-bar {
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .top-bar h2 {
+            margin: 0;
+            font-size: 20px;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Ensure grid items are responsive */
+            gap: 20px;
+            box-sizing: border-box;
+        }
+
+        .separator {
+            width: 100%;
+            border-top: 2px solid #ddd;
+            margin: 10px 0;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd; /* Adds border to each card */
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            height: 100%;
+            box-sizing: border-box;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            font-size: 20px;
+            color: #333;
+        }
+
+        .card p {
+            font-size: 16px;
+            color: #555;
+            margin: 5px 0;
+        }
+
+        .card a {
+            margin-top: 10px;
+            text-decoration: none;
+            color: white;
+            background-color: #007bff;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .card a:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .card a:active {
+            background-color: #004080;
+        }
+
+        /* Ensuring responsiveness for smaller devices */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .card {
+                padding: 15px;
+            }
+
+            .card h3 {
+                font-size: 18px;
+            }
+
+            .card p {
+                font-size: 14px;
+            }
+
+            .card a {
+                font-size: 14px;
+                padding: 8px 16px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h2>Welcome, {{ user.username }}!</h2>
-    <p>This is a protected page accessible only to logged-in users.</p>
+    <!-- Top Bar with Welcome Message -->
+    <div class="top-bar">
+        <h2>Welcome, {{ user.username }}!</h2>
+    </div>
+
+    <!-- Main Content Container -->
+    <div class="container">
+        {% for item in items %}
+        <div class="card">
+            <h3>{{ item.appname }}</h3>
+            <div class="separator"></div> <!-- Separator line after appname -->
+            <p><strong>Category 1:</strong> {{ item.category1 }}</p>
+            <p><strong>Category 2:</strong> {{ item.category2 }}</p>
+            <p><strong>Points:</strong> {{ item.add_points }}</p>
+            <a href="{% url 'item_detail' item.id %}">View Details</a>
+        </div>
+        {% empty %}
+        <div class="card">
+            <p>No items found.</p>
+        </div>
+        {% endfor %}
+    </div>
 </body>
 </html>
