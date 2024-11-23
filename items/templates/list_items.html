@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fb;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            margin-top: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 1000px;
+            overflow-x: auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+        }
+
+        td a {
+            color: #007bff;
+            text-decoration: none;
+            word-wrap: break-word;
+        }
+
+        td a:hover {
+            color: #0056b3;
+        }
+
+        td {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .no-items {
+            text-align: center;
+            color: #777;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        a {
+            margin-top: 20px;
+            text-decoration: none;
+            color: #007bff;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>All Added Items</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>App Name</th>
+                    <th>App Link</th>
+                    <th>Category 1</th>
+                    <th>Category 2</th>
+                    <th>Points</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                <tr>
+                    <td>{{ item.appname }}</td>
+                    <td><a href="{{ item.applink }}" target="_blank">{{ item.applink }}</a></td>
+                    <td>{{ item.category1 }}</td>
+                    <td>{{ item.category2 }}</td>
+                    <td>{{ item.add_points }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="no-items">No items added yet.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'add_item' %}">Add New Item</a>
+    </div>
+</body>
+</html>

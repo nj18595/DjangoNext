@@ -14,4 +14,4 @@ def add_item(request):
 
 def home(request):
     items = Item.objects.all()
-    return render(request, 'home.html', {'items': items})
+    return render(request, 'list_items.html', {'items': items})
