@@ -4,7 +4,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from accounts.forms import SignUpForm
 from django.contrib.auth.decorators import login_required
-from accounts.models import Item
+from items.models import Item
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser
